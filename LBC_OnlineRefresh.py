@@ -20,7 +20,8 @@ class LBCAPI(object):
         try:
             myself = self.getMyself()
             self.cprint("\r\nHello, " + myself['data']['username'] + ".\r\n")
-        except Exception: 
+        except Exception as e: 
+            print e
             self.cprint("Error authenticating API KEY + API SECRET, or error parsing data. Please try again.")
             sys.exit()
             
@@ -51,7 +52,7 @@ class LBCAPI(object):
         headers = {}
 	message = self.message(relative_path, params)
 	headers['Apiauth-Key'] = self.API_KEY
-	headers['Apiauth-Nonce'] = self.nonce()
+	headers['Apiauth-Nonce'] = str(self.nonce())
 	headers['Apiauth-Signature'] = self.signature(message)
 	result = requests.get('https://localbitcoins.com' + relative_path, headers = headers)
 	return result.json()
