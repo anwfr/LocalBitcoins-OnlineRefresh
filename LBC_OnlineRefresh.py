@@ -61,4 +61,6 @@ class LBCAPI(object):
         return self.sendMessage('/api/myself/','')
 	
 if __name__ == '__main__':
-    LBC = LBCAPI('', '')
+    apiKey = sys.argv[1]
+    apiSecret = sys.argv[2]
+    LBC = LBCAPI(apiKey, apiSecret)
